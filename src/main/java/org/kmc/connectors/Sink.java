@@ -18,7 +18,7 @@ public class Sink
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"connectgroup2");
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG,"conneectgfhroup0");
         properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
 
         KafkaConsumer kafkaConsumer=new KafkaConsumer<>(properties);
@@ -32,8 +32,11 @@ public class Sink
                 for (ConsumerRecord<String, String> consumerRecord : consumerRecords)
                 {
                     System.out.println("key : " + consumerRecord.key() + "  value : " + consumerRecord.value() + "  offset : " + consumerRecord.offset()+"   group_id : "+consumerRecord.topic());
-
+                    bufferedWriter.write(consumerRecord.toString());
+                    bufferedWriter.newLine();
+                    bufferedWriter.flush();
                 }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
